@@ -1,0 +1,64 @@
+spring:
+  datasource:
+    password: 12345
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/start-up
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  application:
+    name: api-gateway
+
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 12000
+        response-timeout: 1200s
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "https://www.vistager.com"
+              - "https://vistager.com"
+              - "http://localhost:3000"
+            allowedHeaders:
+              - "Origin"
+              - "Accept"
+              - "Authorization"
+              - "Referer"
+              - "Json-View"
+              - "X-PINGOTHER"
+              - "Content-Type"
+              - "X-Requested-With"
+              - "Access-Control-Request-Method"
+              - "Access-Control-Request-Headers"
+              - "Authorization"
+              - "Access-Control-Allow-Origin"
+            allowedMethods:
+              - POST
+              - GET
+              - OPTIONS
+            exposedHeaders:
+              - "Access-Control-Allow-Origin"
+              - "Authorization"
+
+server:
+  port: 8080
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://eureka-service:8761/eureka/
+
+# JWT
+token:
+  signing:
+    key: 7EFE8194CE56BC22F6AC6AAB265DC7EFE8194CE56BC
+  timeToLive: 84600
+
